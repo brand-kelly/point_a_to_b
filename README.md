@@ -2,7 +2,7 @@
 
 Collaborators:
 
-Brandon Kelly
+Brandon Kelly | bjk2299
 
 Mauricio Benitez | mrg3688
 
