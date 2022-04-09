@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="time1">10</integer>
+    <integer name="price1">8</integer>
+    <integer name="time2">12</integer>
+    <integer name="price2">9</integer>
+    <integer name="time3">20</integer>
+    <integer name="price3">6</integer>
+    <integer name="time4">20</integer>
+    <integer name="price4">7</integer>
+    <integer name="time5">30</integer>
+    <integer name="price5">2</integer>
+    <integer name="time6">10</integer>
+    <integer name="price6">12</integer>
+</resources>
