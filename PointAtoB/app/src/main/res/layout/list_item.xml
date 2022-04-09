@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
     android:orientation="vertical">
 
     <TextView
@@ -14,7 +14,7 @@
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/quantum_googgreen">
+        android:background="@color/green">
 
         <TextView
             android:id="@+id/service_name"
