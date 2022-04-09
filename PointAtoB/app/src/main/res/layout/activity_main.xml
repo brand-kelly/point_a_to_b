@@ -46,13 +46,13 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="173dp"
-        android:layout_height="146dp"
+        android:layout_width="302dp"
+        android:layout_height="139dp"
         app:layout_constraintBottom_toTopOf="@+id/pointA"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/app_logo" />
+        app:srcCompat="@drawable/banner" />
 
     <!--    <fragment-->
 <!--        android:id="@+id/fragment_first"-->
