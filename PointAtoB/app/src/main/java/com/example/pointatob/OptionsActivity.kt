@@ -33,8 +33,8 @@ class OptionsActivity : AppCompatActivity() {
 
     fun sendPreference(view: View){
         val intent = Intent(this,ServiceListActivity::class.java).apply {
-//            putExtra("pointA", binding.pointA.text.toString())
-//            putExtra("pointB", binding.pointB.text.toString())
+            putExtra("pointA", binding.pointA.text.toString())
+            putExtra("pointB", binding.pointB.text.toString())
         }
         startActivity(intent)
     }
