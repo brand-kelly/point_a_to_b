@@ -9,9 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PointAToB">
-        <activity android:name=".OptionsActivity"
-            android:parentActivityName=".MainActivity">
-        </activity>
+        <activity
+            android:name=".ServiceListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".OptionsActivity"
+            android:parentActivityName=".MainActivity"></activity>
         <activity
             android:name=".MainActivity"
             android:exported="true">

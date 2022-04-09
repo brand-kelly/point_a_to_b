@@ -1,6 +1,8 @@
 package com.example.pointatob
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -27,5 +29,13 @@ class OptionsActivity : AppCompatActivity() {
         val strPointB = intent.getStringExtra("pointB")
         binding.pointA.text = intent.getStringExtra("pointA")
         binding.pointB.text = intent.getStringExtra("pointB")
+    }
+
+    fun sendPreference(view: View){
+        val intent = Intent(this,ServiceListActivity::class.java).apply {
+//            putExtra("pointA", binding.pointA.text.toString())
+//            putExtra("pointB", binding.pointB.text.toString())
+        }
+        startActivity(intent)
     }
 }
