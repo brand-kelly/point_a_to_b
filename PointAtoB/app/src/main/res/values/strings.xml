@@ -19,6 +19,7 @@
     <string name="serviceName4">Bird</string>
     <string name="serviceName5">Metro</string>
     <string name="serviceName6">Uber X</string>
+    <string name="title_activity_maps">MapsActivity</string>
 
 
 </resources>

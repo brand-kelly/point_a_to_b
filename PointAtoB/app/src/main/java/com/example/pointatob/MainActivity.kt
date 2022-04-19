@@ -118,14 +118,13 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-        val intent = Intent(this, OptionsActivity::class.java).apply {
+        val intent = Intent(this, MapsActivity::class.java).apply {
             putExtra("pointA", placeNames[0])
             putExtra("pointB", placeNames[1])
             putExtra("longA", longs[0])
             putExtra("longB", longs[1])
             putExtra("latA", longs[0])
             putExtra("latB", longs[1])
-
         }
         startActivity(intent)
     }
