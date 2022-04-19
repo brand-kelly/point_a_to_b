@@ -12,15 +12,11 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.LatLngBounds
-import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.gms.maps.model.PolylineOptions
+import com.google.android.gms.maps.model.*
 import com.google.android.libraries.places.api.Places
 import com.google.gson.Gson
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import kotlin.math.*
 
 @Suppress("DEPRECATION")
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -104,8 +100,17 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val destination = LatLng(latB, longB)
 
         mMap.clear()
-        mMap.addMarker(MarkerOptions().position(starting).title(pointA))
-        mMap.addMarker(MarkerOptions().position(destination).title(pointB))
+        mMap.addMarker(
+            MarkerOptions()
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+                .position(starting)
+                .title(pointA)
+                )
+        mMap.addMarker(
+            MarkerOptions()
+            .position(destination)
+            .title(pointB)
+            )
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(starting, 14F))
     }
 
