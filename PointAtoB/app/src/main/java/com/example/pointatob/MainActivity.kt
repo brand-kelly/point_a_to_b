@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import com.example.pointatob.databinding.ActivityMainBinding
 import com.google.android.gms.common.api.Status
 import com.google.android.libraries.places.api.Places
@@ -107,19 +108,24 @@ class MainActivity : AppCompatActivity() {
 
 
     fun sendData(view: View) {
-//        if (binding.pointB.text.toString() == "") {
-//            Toast.makeText(this, "Please input a starting address", Toast.LENGTH_SHORT).show()
-//            return
-//        }
-//
-//        if (binding.pointA.text.toString() == "") {
-//            Toast.makeText(this, "Please input a destination address", Toast.LENGTH_SHORT).show()
-//            return
-//        }
+        if (placeNames[0] == "") {
+            Toast.makeText(this, "Please input a starting address", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if (placeNames[1] == "") {
+            Toast.makeText(this, "Please input a destination address", Toast.LENGTH_SHORT).show()
+            return
+        }
 
         val intent = Intent(this, OptionsActivity::class.java).apply {
             putExtra("pointA", placeNames[0])
             putExtra("pointB", placeNames[1])
+            putExtra("longA", longs[0])
+            putExtra("longB", longs[1])
+            putExtra("latA", longs[0])
+            putExtra("latB", longs[1])
+
         }
         startActivity(intent)
     }
