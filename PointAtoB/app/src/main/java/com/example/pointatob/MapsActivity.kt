@@ -1,5 +1,6 @@
 package com.example.pointatob
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
@@ -19,13 +20,13 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolylineOptions
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import java.security.cert.PKIXRevocationChecker
 
 @Suppress("DEPRECATION")
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
-    private val TAG = "MapsActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,26 +43,41 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        val gd = findViewById<Button>(R.id.directions)
-            mapFragment.getMapAsync {
-                val pointA = intent.getStringExtra("pointA")
-                val pointB = intent.getStringExtra("pointB")
-                val latA = intent.extras!!.getDouble("latA")
-                val longA = intent.extras!!.getDouble("longA")
-                val starting = LatLng(latA, longA)
-                val latB = intent.extras!!.getDouble("latB")
-                val longB = intent.extras!!.getDouble("longB")
-                val destination = LatLng(latB, longB)
 
-                // Add both markers and move the camera
-                mMap = it
-                mMap.addMarker(MarkerOptions().position(starting).title("Starting from: $pointA"))
-                mMap.addMarker(MarkerOptions().position(destination).title("Destination: $pointB"))
-                val urll = getDirectionURL(starting, destination, BuildConfig.MAPS_API_KEY)
-                GetDirection(urll).execute()
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(starting, 14F))
+        mapFragment.getMapAsync {
+            val pointA = intent.getStringExtra("pointA")
+            val pointB = intent.getStringExtra("pointB")
+            val latA = intent.extras!!.getDouble("latA")
+            val longA = intent.extras!!.getDouble("longA")
+            val starting = LatLng(latA, longA)
+            val latB = intent.extras!!.getDouble("latB")
+            val longB = intent.extras!!.getDouble("longB")
+            val destination = LatLng(latB, longB)
+
+            // Add both markers and move the camera
+            mMap = it
+            mMap.addMarker(MarkerOptions().position(starting).title("Starting from: $pointA"))
+            mMap.addMarker(MarkerOptions().position(destination).title("Destination: $pointB"))
+            val urll = getDirectionURL(starting, destination, BuildConfig.MAPS_API_KEY)
+            GetDirection(urll).execute()
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(starting, 14F))
+        }
+
+        val mainButton = findViewById<Button>(R.id.backToMainButton)
+        val optionsButton = findViewById<Button>(R.id.toOptionsButton)
+
+        mainButton.setOnClickListener{
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
+        optionsButton.setOnClickListener{
+            val intent = Intent(this, OptionsActivity::class.java).apply{
+                putExtra("pointA", intent.getStringExtra("pointA"))
+                putExtra("pointB", intent.getStringExtra("pointB"))
             }
-
+            startActivity(intent)
+        }
 
     }
 
