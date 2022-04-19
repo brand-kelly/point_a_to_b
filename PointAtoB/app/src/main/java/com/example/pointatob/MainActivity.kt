@@ -5,8 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.Toast
 import com.example.pointatob.databinding.ActivityMainBinding
 import com.google.android.gms.common.api.Status
 import com.google.android.libraries.places.api.Places
@@ -56,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         autocompleteFragmentA.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
                 // TODO: Get info about the selected place.
-                placeNames.add(place.name)
+                place.name?.let { placeNames.add(it.toString()) }
                 Log.i(TAG, "Place: ${place.name}, ${place.id}")
             }
 
@@ -69,7 +67,7 @@ class MainActivity : AppCompatActivity() {
         autocompleteFragmentB.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
                 // TODO: Get info about the selected place.
-                placeNames.add(place.name)
+                place.name?.let { placeNames.add(it.toString()) }
                 Log.i(TAG, "Place: ${place.name}, ${place.id}")
             }
 
