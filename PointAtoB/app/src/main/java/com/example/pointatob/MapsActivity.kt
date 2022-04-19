@@ -53,8 +53,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
             // Add both markers and move the camera
             mMap = it
-            mMap.addMarker(MarkerOptions().position(starting).title("Starting from: $pointA"))
-            mMap.addMarker(MarkerOptions().position(destination).title("Destination: $pointB"))
+            mMap.addMarker(MarkerOptions()
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+                .position(starting)
+                .title("Starting from: $pointA")
+            )
+            mMap.addMarker(MarkerOptions()
+                .position(destination)
+                .title("Destination: $pointB")
+            )
             val urll = getDirectionURL(starting, destination, BuildConfig.MAPS_API_KEY)
             GetDirection(urll).execute()
             mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 150))
