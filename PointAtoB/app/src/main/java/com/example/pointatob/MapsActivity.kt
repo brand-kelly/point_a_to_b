@@ -3,31 +3,31 @@ package com.example.pointatob
 import android.content.Intent
 import android.graphics.Color
 import android.os.AsyncTask
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
-
+import androidx.appcompat.app.AppCompatActivity
+import com.example.pointatob.databinding.ActivityMapsBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.example.pointatob.databinding.ActivityMapsBinding
-import com.google.android.libraries.places.api.Places
-import com.google.gson.Gson
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolylineOptions
+import com.google.android.libraries.places.api.Places
+import com.google.gson.Gson
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import java.security.cert.PKIXRevocationChecker
+import kotlin.math.*
 
 @Suppress("DEPRECATION")
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
-
+    private var TAG = ".MapsActivity"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMapsBinding.inflate(layoutInflater)
@@ -53,6 +53,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             val latB = intent.extras!!.getDouble("latB")
             val longB = intent.extras!!.getDouble("longB")
             val destination = LatLng(latB, longB)
+            val bounds = LatLngBounds.builder().include(starting).include(destination).build()
 
             // Add both markers and move the camera
             mMap = it
@@ -60,7 +61,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             mMap.addMarker(MarkerOptions().position(destination).title("Destination: $pointB"))
             val urll = getDirectionURL(starting, destination, BuildConfig.MAPS_API_KEY)
             GetDirection(urll).execute()
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(starting, 14F))
+            mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 150))
         }
 
         val mainButton = findViewById<Button>(R.id.backToMainButton)
@@ -91,7 +92,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      * installed Google Play services and returned to the app.
      */
     override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap!!
+        mMap = googleMap
         // Set lat and long values, place names
         val pointA = intent.getStringExtra("pointA")
         val pointB = intent.getStringExtra("pointB")
