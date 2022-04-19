@@ -70,12 +70,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val latB = intent.extras!!.getDouble("latB")
         val longB = intent.extras!!.getDouble("longB")
         val destination = LatLng(latB, longB)
-
-        if (longA is Double) {
-            Log.i(TAG, "longA is double")
-        } else {
-            Log.i(TAG, "longA is not double")
-        }
+        Log.i(TAG, "latA: {$latA} is double. longA: {$longA}")
 
 
 //        LatLngBounds.Builder b = new LatLngBounds.Builder();

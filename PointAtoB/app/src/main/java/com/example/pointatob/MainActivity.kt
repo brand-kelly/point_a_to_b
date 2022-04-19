@@ -123,8 +123,8 @@ class MainActivity : AppCompatActivity() {
             putExtra("pointB", placeNames[1])
             putExtra("longA", longs[0])
             putExtra("longB", longs[1])
-            putExtra("latA", longs[0])
-            putExtra("latB", longs[1])
+            putExtra("latA", lats[0])
+            putExtra("latB", lats[1])
         }
         startActivity(intent)
     }
