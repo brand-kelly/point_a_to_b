@@ -13,9 +13,13 @@ import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 
 class MainActivity : AppCompatActivity() {
+    // Global variables
     private lateinit var binding: ActivityMainBinding
-    val placeNames = mutableListOf<String>()
+    private val placeNames = mutableListOf<String>("", "")
+    private val lats = mutableListOf<Double>(0.0, 0.0)
+    private val longs = mutableListOf<Double>(0.0, 0.0)
     private val TAG: String = "MainActivity"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -23,7 +27,6 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
 
         // Places initialization
-        // TODO: Remove API Key
         Places.initialize(applicationContext, BuildConfig.MAPS_API_KEY)
         val placesClient = Places.createClient(this)
         val autocompleteFragmentA =
@@ -32,8 +35,11 @@ class MainActivity : AppCompatActivity() {
         val autocompleteFragmentB =
             supportFragmentManager.findFragmentById(R.id.autocomplete_fragment_b)
                     as AutocompleteSupportFragment
+
+        // Set AutoComplete fragment hints
         autocompleteFragmentA.setHint("Pick Up Location")
         autocompleteFragmentB.setHint("Destination")
+
         // Set Place Fields for required fields
         autocompleteFragmentA.setPlaceFields(
             listOf(
@@ -54,7 +60,9 @@ class MainActivity : AppCompatActivity() {
         autocompleteFragmentA.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
                 // TODO: Get info about the selected place.
-                place.name?.let { placeNames.add(it.toString()) }
+                place.name?.let { placeNames[0] = (it.toString()) }
+                place.latLng.longitude?.let { longs[0] = it}
+                place.latLng.latitude?.let { lats[0] = it}
                 Log.i(TAG, "Place: ${place.name}, ${place.id}")
             }
 
@@ -67,7 +75,9 @@ class MainActivity : AppCompatActivity() {
         autocompleteFragmentB.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
                 // TODO: Get info about the selected place.
-                place.name?.let { placeNames.add(it.toString()) }
+                place.name?.let { placeNames[1] = (it.toString()) }
+                place.latLng.longitude?.let { longs[1] = it}
+                place.latLng.latitude?.let { lats[1] = it}
                 Log.i(TAG, "Place: ${place.name}, ${place.id}")
             }
 
