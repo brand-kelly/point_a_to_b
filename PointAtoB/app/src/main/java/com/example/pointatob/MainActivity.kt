@@ -61,8 +61,16 @@ class MainActivity : AppCompatActivity() {
             override fun onPlaceSelected(place: Place) {
                 // TODO: Get info about the selected place.
                 place.name?.let { placeNames[0] = (it.toString()) }
-                place.latLng.longitude?.let { longs[0] = it}
-                place.latLng.latitude?.let { lats[0] = it}
+                place.latLng?.longitude.let {
+                    if (it != null) {
+                        longs[0] = it
+                    }
+                }
+                place.latLng?.latitude.let {
+                    if (it != null) {
+                        lats[0] = it
+                    }
+                }
                 Log.i(TAG, "Place: ${place.name}, ${place.id}")
             }
 
@@ -76,8 +84,16 @@ class MainActivity : AppCompatActivity() {
             override fun onPlaceSelected(place: Place) {
                 // TODO: Get info about the selected place.
                 place.name?.let { placeNames[1] = (it.toString()) }
-                place.latLng.longitude?.let { longs[1] = it}
-                place.latLng.latitude?.let { lats[1] = it}
+                place.latLng?.longitude.let {
+                    if (it != null) {
+                        longs[1] = it
+                    }
+                }
+                place.latLng?.latitude.let {
+                    if (it != null) {
+                        lats[1] = it
+                    }
+                }
                 Log.i(TAG, "Place: ${place.name}, ${place.id}")
             }
 
