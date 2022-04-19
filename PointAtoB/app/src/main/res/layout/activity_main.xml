@@ -6,29 +6,57 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/pointA"
-        android:layout_width="200dp"
+<!--    <EditText-->
+<!--        android:id="@+id/pointA"-->
+<!--        android:layout_width="200dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="152dp"-->
+<!--        android:hint="Point A"-->
+<!--        android:minHeight="48dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.497"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/pointB"-->
+<!--        android:layout_width="200dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="Point B"-->
+<!--        android:minHeight="48dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.497"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/pointA"-->
+<!--        app:layout_constraintVertical_bias="0.06" />-->
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/autocomplete_fragment_a"
+        android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="152dp"
         android:hint="Point A"
+        android:background="#FFFEFE"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/pointB"
-        android:layout_width="200dp"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/autocomplete_fragment_b"
+        android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:background="#FBFBFB"
         android:hint="Point B"
         android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pointA"
+        app:layout_constraintTop_toBottomOf="@+id/autocomplete_fragment_a"
         app:layout_constraintVertical_bias="0.06" />
 
     <Button
@@ -42,33 +70,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pointB" />
+        app:layout_constraintTop_toBottomOf="@+id/autocomplete_fragment_b" />
 
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="302dp"
         android:layout_height="139dp"
-        app:layout_constraintBottom_toTopOf="@+id/pointA"
+        app:layout_constraintBottom_toTopOf="@+id/autocomplete_fragment_a"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/banner" />
 
-    <!--    <fragment-->
-<!--        android:id="@+id/fragment_first"-->
-<!--        class="com.example.pointatob.FirstFragment"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintLeft_toLeftOf="parent"-->
-<!--        app:layout_constraintRight_toRightOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"/>-->
-    <!--    <androidx.fragment.app.FragmentContainerView xmlns:-->
-<!--        android="https://schemas.android.com/apk/res/android"-->
-<!--        android:id="@+id/fragment_container_view"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:name="com.example.AutoComplete" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
