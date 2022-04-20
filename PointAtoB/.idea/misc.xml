@@ -7,7 +7,7 @@
         <entry key="..\:/Users/Brand/Documents/CS 329E Mobile/mcfp_tdb/PointAtoB/app/src/main/res/layout/activity_service_list.xml" value="0.3858695652173913" />
         <entry key="..\:/Users/NZXT/AndroidStudioProjects/mcfp_tdb/PointAtoB/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/NZXT/AndroidStudioProjects/mcfp_tdb/PointAtoB/app/src/main/res/layout/activity_maps.xml" value="0.31197916666666664" />
-        <entry key="..\:/Users/NZXT/AndroidStudioProjects/mcfp_tdb/PointAtoB/app/src/main/res/layout/activity_options.xml" value="0.25" />
+        <entry key="..\:/Users/NZXT/AndroidStudioProjects/mcfp_tdb/PointAtoB/app/src/main/res/layout/activity_options.xml" value="0.1" />
         <entry key="..\:/Users/NZXT/AndroidStudioProjects/mcfp_tdb/PointAtoB/app/src/main/res/layout/activity_service_list.xml" value="0.49930843706777317" />
         <entry key="..\:/Users/NZXT/AndroidStudioProjects/mcfp_tdb/PointAtoB/app/src/main/res/layout/fragment_first.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/NZXT/AndroidStudioProjects/mcfp_tdb/PointAtoB/app/src/main/res/layout/list_item.xml" value="0.1" />
@@ -18,7 +18,8 @@
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_options.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_service_list.xml" value="0.4629348754882813" />
+        <entry key="app/src/main/res/layout/activity_service_list.xml" value="0.26" />
+        <entry key="app/src/main/res/layout/content_options2.xml" value="0.22146739130434784" />
         <entry key="app/src/main/res/layout/list_item.xml" value="0.10283687943262411" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
