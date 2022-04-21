@@ -1,17 +1,32 @@
 package com.example.pointatob
 
+import android.Manifest
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
 import android.os.Bundle
+import android.os.Looper
+import android.provider.Settings
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.example.pointatob.databinding.ActivityMainBinding
 import com.google.android.gms.common.api.Status
+import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
+import com.google.android.gms.location.*
+
 
 class MainActivity : AppCompatActivity() {
     // Global variables
@@ -20,6 +35,12 @@ class MainActivity : AppCompatActivity() {
     private val lats = mutableListOf<Double>(0.0, 0.0)
     private val longs = mutableListOf<Double>(0.0, 0.0)
     private val TAG: String = "MainActivity"
+    private var locationPermissionGranted = false
+    private val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
+    private lateinit var locationManager: LocationManager
+    private val locationPermissionCode = 2
+    val PERMISSION_ID = 42
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,15 +48,19 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
 
+        //current location
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
+
         // Places initialization
         Places.initialize(applicationContext, BuildConfig.MAPS_API_KEY)
-        val placesClient = Places.createClient(this)
         val autocompleteFragmentA =
             supportFragmentManager.findFragmentById(R.id.autocomplete_fragment_a)
                     as AutocompleteSupportFragment
         val autocompleteFragmentB =
             supportFragmentManager.findFragmentById(R.id.autocomplete_fragment_b)
                     as AutocompleteSupportFragment
+
 
         // Set AutoComplete fragment hints
         autocompleteFragmentA.setHint("Pick Up Location")
@@ -105,6 +130,82 @@ class MainActivity : AppCompatActivity() {
         })
 //        setContentView(view)
     }
+
+    fun currentLocation(view: View){
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return
+        }
+        fusedLocationClient.lastLocation
+            .addOnSuccessListener { location : Location? ->
+                // Got last known location. In some rare situations this can be null.
+                findViewById<TextView>(R.id.latTextView).text = location?.latitude.toString()
+                findViewById<TextView>(R.id.lonTextView).text = location?.longitude.toString()
+            }
+//        getLocationPermission()
+//        if (locationPermissionGranted) {
+//            Toast.makeText(this, "hi", Toast.LENGTH_SHORT).show()
+//
+//        }else {
+//            // The user has not granted permission.
+//            Log.i(TAG, "The user did not grant location permission.")
+//            // Prompt the user for permission.
+//            getLocationPermission()
+//        }
+    }
+//
+//
+//
+//    private fun getLocationPermission() {
+//        /*
+//         * Request location permission, so that we can get the location of the
+//         * device. The result of the permission request is handled by a callback,
+//         * onRequestPermissionsResult.
+//         */
+//        if (ContextCompat.checkSelfPermission(this.applicationContext,
+//                Manifest.permission.ACCESS_FINE_LOCATION)
+//            == PackageManager.PERMISSION_GRANTED) {
+//            locationPermissionGranted = true
+//        } else {
+//            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+//                PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION)
+//        }
+//    }
+//
+//    override fun onRequestPermissionsResult(requestCode: Int,
+//                                            permissions: Array<String>,
+//                                            grantResults: IntArray) {
+//        locationPermissionGranted = false
+//        when (requestCode) {
+//            PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION -> {
+//
+//                // If request is cancelled, the result arrays are empty.
+//                if (grantResults.isNotEmpty() &&
+//                    grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                    locationPermissionGranted = true
+//                }
+//            }
+//            else -> super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+//        }
+//        Toast.makeText(this, "location permission granted", Toast.LENGTH_SHORT).show()
+//    }
+
+
+
+
 
 
     fun sendData(view: View) {

@@ -20,6 +20,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/currentLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set Current Location"
+        app:layout_constraintBottom_toTopOf="@+id/autocomplete_fragment_b"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.242"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/autocomplete_fragment_a"
+        app:layout_constraintVertical_bias="0.0"
+        android:onClick="currentLocation"/>
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/autocomplete_fragment_b"
         android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
@@ -30,16 +43,16 @@
         android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/autocomplete_fragment_a"
-        app:layout_constraintVertical_bias="0.06" />
+        app:layout_constraintVertical_bias="0.291" />
 
     <Button
         android:id="@+id/send_button"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="136dp"
+        android:layout_marginTop="100dp"
         android:background="@color/black"
         android:onClick="sendData"
         android:text="Search"
@@ -58,6 +71,25 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/banner" />
 
+    <TextView
+        android:id="@+id/latTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/autocomplete_fragment_b"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/currentLocation" />
+
+    <TextView
+        android:id="@+id/lonTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/autocomplete_fragment_b"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/latTextView"
+        app:layout_constraintTop_toBottomOf="@+id/currentLocation" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
