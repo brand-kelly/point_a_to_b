@@ -131,77 +131,61 @@ class MainActivity : AppCompatActivity() {
 //        setContentView(view)
     }
 
+    @SuppressLint("MissingPermission")
     fun currentLocation(view: View){
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return
+        getLocationPermission()
+        if (locationPermissionGranted) {
+            fusedLocationClient.lastLocation
+                .addOnSuccessListener { location : Location? ->
+                    // Got last known location. In some rare situations this can be null.
+                    findViewById<TextView>(R.id.latTextView).text = location?.latitude.toString()
+                    findViewById<TextView>(R.id.lonTextView).text = location?.longitude.toString()
+                }
+            Toast.makeText(this, "hi", Toast.LENGTH_SHORT).show()
+
+        }else {
+            // The user has not granted permission.
+            Log.i(TAG, "The user did not grant location permission.")
+            // Prompt the user for permission.
+            getLocationPermission()
         }
-        fusedLocationClient.lastLocation
-            .addOnSuccessListener { location : Location? ->
-                // Got last known location. In some rare situations this can be null.
-                findViewById<TextView>(R.id.latTextView).text = location?.latitude.toString()
-                findViewById<TextView>(R.id.lonTextView).text = location?.longitude.toString()
-            }
-//        getLocationPermission()
-//        if (locationPermissionGranted) {
-//            Toast.makeText(this, "hi", Toast.LENGTH_SHORT).show()
-//
-//        }else {
-//            // The user has not granted permission.
-//            Log.i(TAG, "The user did not grant location permission.")
-//            // Prompt the user for permission.
-//            getLocationPermission()
-//        }
     }
-//
-//
-//
-//    private fun getLocationPermission() {
-//        /*
-//         * Request location permission, so that we can get the location of the
-//         * device. The result of the permission request is handled by a callback,
-//         * onRequestPermissionsResult.
-//         */
-//        if (ContextCompat.checkSelfPermission(this.applicationContext,
-//                Manifest.permission.ACCESS_FINE_LOCATION)
-//            == PackageManager.PERMISSION_GRANTED) {
-//            locationPermissionGranted = true
-//        } else {
-//            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-//                PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION)
-//        }
-//    }
-//
-//    override fun onRequestPermissionsResult(requestCode: Int,
-//                                            permissions: Array<String>,
-//                                            grantResults: IntArray) {
-//        locationPermissionGranted = false
-//        when (requestCode) {
-//            PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION -> {
-//
-//                // If request is cancelled, the result arrays are empty.
-//                if (grantResults.isNotEmpty() &&
-//                    grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                    locationPermissionGranted = true
-//                }
-//            }
-//            else -> super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-//        }
-//        Toast.makeText(this, "location permission granted", Toast.LENGTH_SHORT).show()
-//    }
+
+
+
+    private fun getLocationPermission() {
+        /*
+         * Request location permission, so that we can get the location of the
+         * device. The result of the permission request is handled by a callback,
+         * onRequestPermissionsResult.
+         */
+        if (ContextCompat.checkSelfPermission(this.applicationContext,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+            == PackageManager.PERMISSION_GRANTED) {
+            locationPermissionGranted = true
+        } else {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION)
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int,
+                                            permissions: Array<String>,
+                                            grantResults: IntArray) {
+        locationPermissionGranted = false
+        when (requestCode) {
+            PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION -> {
+
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.isNotEmpty() &&
+                    grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    locationPermissionGranted = true
+                }
+            }
+            else -> super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        }
+        Toast.makeText(this, "location permission granted", Toast.LENGTH_SHORT).show()
+    }
 
 
 
