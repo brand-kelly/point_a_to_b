@@ -32,7 +32,7 @@
         <activity
             android:name=".MapsActivity"
             android:exported="false"
-            android:label="@string/title_activity_maps" />
+            android:label="Map Route" />
         <activity
             android:name=".ServiceListActivity"
             android:exported="false" />
