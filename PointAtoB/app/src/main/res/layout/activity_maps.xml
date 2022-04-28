@@ -26,7 +26,7 @@
         app:layout_constraintHorizontal_bias="0.049"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/map"
-        app:layout_constraintVertical_bias="0.976"
+        app:layout_constraintVertical_bias="0.96"
         tools:ignore="MissingConstraints" />
 
     <Button
@@ -35,12 +35,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="Next"
+        android:text="See Options"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/map"
-        app:layout_constraintVertical_bias="0.976"
+        app:layout_constraintVertical_bias="0.96"
         tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>
