@@ -29,9 +29,9 @@ class ItemAdapter (
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = dataset[position]
-        holder.serviceName.text = context.resources.getString(item.serviceName)
-        holder.time.text = context.resources.getInteger(item.time).toString() + "mins"
-        holder.price.text = "$" + context.resources.getInteger(item.price).toString()
+        holder.serviceName.text = item.serviceName.toString()
+        holder.time.text = item.time.toString() + "mins"
+        holder.price.text = "$" + item.price.toString()
     }
 
     override fun getItemCount() = dataset.size
