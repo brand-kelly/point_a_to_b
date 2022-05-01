@@ -29,7 +29,7 @@ class ServiceListActivity : AppCompatActivity() {
 
 
         val selected = intent.getStringExtra("selectedButton")
-        val distance = intent.getStringExtra("distance")
+        val distance = intent.getDoubleExtra("distance", 10.00)
 
 
         val myDataset = Datasource().loadServices(selected, distance)

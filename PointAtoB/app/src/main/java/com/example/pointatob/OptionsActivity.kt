@@ -33,7 +33,7 @@ class OptionsActivity : AppCompatActivity() {
 
         val radioSelection = findViewById<RadioGroup>(R.id.radio_preferences)
         val selected = radioSelection.checkedRadioButtonId
-        val distance = intent.getStringExtra("distance")
+        val distance = intent.getDoubleExtra("distance", 10.00)
 
 
 
@@ -54,7 +54,7 @@ class OptionsActivity : AppCompatActivity() {
             putExtra("selectedButton", findViewById<RadioButton>(radioSelection.checkedRadioButtonId).text)
             putExtra("pointA", binding.pointA.text.toString())
             putExtra("pointB", binding.pointB.text.toString())
-            putExtra("distance", distance);
+            putExtra("distance", intent.getDoubleExtra("distance", 10.00))
         }
         startActivity(intent)
     }
