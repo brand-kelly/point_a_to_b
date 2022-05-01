@@ -35,7 +35,8 @@
             android:label="Map Route" />
         <activity
             android:name=".ServiceListActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label= "Service Options"/>
         <activity
             android:name=".OptionsActivity"
             android:parentActivityName=".MainActivity" />

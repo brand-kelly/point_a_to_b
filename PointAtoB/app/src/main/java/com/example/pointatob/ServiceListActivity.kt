@@ -1,10 +1,10 @@
 package com.example.pointatob
 
 import adapter.ItemAdapter
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.pointatob.databinding.ActivityMainBinding
 import com.example.pointatob.databinding.ActivityServiceListBinding
 import data.Datasource
 
@@ -13,6 +13,7 @@ class ServiceListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        getSupportActionBar()?.setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_service_list)
 
         binding = ActivityServiceListBinding.inflate(layoutInflater)
@@ -28,13 +29,23 @@ class ServiceListActivity : AppCompatActivity() {
 
 
         val selected = intent.getStringExtra("selectedButton")
+        val distance = intent.getStringExtra("distance")
 
 
-        val myDataset = Datasource().loadServices(selected)
+        val myDataset = Datasource().loadServices(selected, distance)
         val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
         recyclerView.adapter = ItemAdapter(this, myDataset)
 
         recyclerView.setHasFixedSize(true)
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.getItemId()) {
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 

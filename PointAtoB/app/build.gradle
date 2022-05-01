@@ -58,4 +58,7 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp")
     implementation("com.squareup.okhttp3:logging-interceptor")
 
+    implementation('com.google.maps.android:android-maps-utils:0.4+')
+
+
 }

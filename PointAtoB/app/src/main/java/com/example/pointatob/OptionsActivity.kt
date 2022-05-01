@@ -33,11 +33,12 @@ class OptionsActivity : AppCompatActivity() {
 
         val radioSelection = findViewById<RadioGroup>(R.id.radio_preferences)
         val selected = radioSelection.checkedRadioButtonId
+        val distance = intent.getStringExtra("distance")
 
 
 
         binding.pointA.text = intent.getStringExtra("pointA")
-        binding.pointB.text = intent.getStringExtra("pointB")
+        binding.pointB.text = intent.getStringExtra("pointB")//intent.getStringExtra("distance")
     }
 
     fun sendPreference(view: View){
@@ -48,11 +49,12 @@ class OptionsActivity : AppCompatActivity() {
             Toast.makeText(this, "Please make a preference selection", Toast.LENGTH_SHORT).show()
             return
         }
-
+        val distance = intent.getStringExtra("distance")
         val intent = Intent(this,ServiceListActivity::class.java).apply {
             putExtra("selectedButton", findViewById<RadioButton>(radioSelection.checkedRadioButtonId).text)
             putExtra("pointA", binding.pointA.text.toString())
             putExtra("pointB", binding.pointB.text.toString())
+            putExtra("distance", distance);
         }
         startActivity(intent)
     }

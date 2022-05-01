@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pointatob.databinding.ActivityMapsBinding
@@ -17,15 +18,23 @@ import com.google.android.libraries.places.api.Places
 import com.google.gson.Gson
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import com.google.maps.android.SphericalUtil;
+import kotlin.properties.Delegates
+
 
 @Suppress("DEPRECATION")
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
+    private lateinit var starting: LatLng
+    private lateinit var destination: LatLng
+    private var distance by Delegates.notNull<Double>()
+
     private var TAG = ".MapsActivity"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        getSupportActionBar()?.setDisplayHomeAsUpEnabled(true);
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -45,11 +54,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             val pointB = intent.getStringExtra("pointB")
             val latA = intent.extras!!.getDouble("latA")
             val longA = intent.extras!!.getDouble("longA")
-            val starting = LatLng(latA, longA)
+            starting = LatLng(latA, longA)
             val latB = intent.extras!!.getDouble("latB")
             val longB = intent.extras!!.getDouble("longB")
-            val destination = LatLng(latB, longB)
+            destination = LatLng(latB, longB)
             val bounds = LatLngBounds.builder().include(starting).include(destination).build()
+            distance = distanceInMi(latA, longA, latB, longB)
 
             // Add both markers and move the camera
             mMap = it
@@ -79,11 +89,40 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             val intent = Intent(this, OptionsActivity::class.java).apply{
                 putExtra("pointA", intent.getStringExtra("pointA"))
                 putExtra("pointB", intent.getStringExtra("pointB"))
+                putExtra("distance", distance)
             }
             startActivity(intent)
         }
 
     }
+
+    fun deg2rad(deg: Double): Double {
+        return deg * Math.PI / 180.0
+    }
+
+    fun rad2deg(rad: Double): Double {
+        return rad * 180.0 / Math.PI
+    }
+    fun distanceInMi(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
+        val theta = lon1 - lon2
+        var dist = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2)) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta))
+        dist = Math.acos(dist)
+        dist = rad2deg(dist)
+        dist = dist * 60 * 1.1515
+        return dist
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.getItemId()) {
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+
 
     /**
      * Manipulates the map once available.
@@ -193,5 +232,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
         return poly
     }
+
+
 
 }
