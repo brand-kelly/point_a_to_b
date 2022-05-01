@@ -46,7 +46,7 @@ class Datasource {
             Service("Uber X", uberXPrice, timeToUberX)
         )
         if (distance < 5) {
-            serviceList.add(Service("Walking", 0, timeToWalk))
+            serviceList.add(Service("Walking", timeToWalk, 0))
             serviceList.add(Service("Bird", birdPrice.roundToInt(), timeToScooter))
             serviceList.add(Service("Lime", limePrice.roundToInt(), timeToScooter))
         }
