@@ -20,6 +20,7 @@ class Datasource {
         val timeToLyft = Random.nextInt(2, 8) + timeToRide
         val timeToUber = Random.nextInt(1, 6) + timeToRide
         val timeToUberX = Random.nextInt(4, 10) + timeToRide
+        val timeToWalk = ((distance / 4) * 60).roundToInt()
 
 
         val randomUberVal = Random.nextDouble(1.00, 1.20)
@@ -39,23 +40,24 @@ class Datasource {
         }
 
 
-        var serviceList = mutableListOf<Service>(
+        val serviceList = mutableListOf(
             Service("Lyft", lyftPrice, timeToLyft),
             Service("Uber", uberPrice, timeToUber),
             Service("Uber X", uberXPrice, timeToUberX)
         )
         if (distance < 5) {
+            serviceList.add(Service("Walking", 0, timeToWalk))
             serviceList.add(Service("Bird", birdPrice.roundToInt(), timeToScooter))
             serviceList.add(Service("Lime", limePrice.roundToInt(), timeToScooter))
         }
 
         //hardcode
-        if (selected == "Cheapest") {
-            return serviceList.sortedWith(compareBy { it.price })
+        return if (selected == "Cheapest") {
+            serviceList.sortedWith(compareBy { it.price })
         } else if (selected == "Fastest") {
-            return serviceList.sortedWith(compareBy { it.time })
+            serviceList.sortedWith(compareBy { it.time })
         } else {
-            return serviceList
+            serviceList
         }
     }
 
