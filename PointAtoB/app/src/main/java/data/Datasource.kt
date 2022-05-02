@@ -1,5 +1,6 @@
 package data
 
+import com.example.pointatob.R
 import model.Service
 import java.math.BigDecimal
 import java.math.RoundingMode
@@ -46,14 +47,14 @@ class Datasource {
 //            Service("Lyft", lyftPrice, timeToLyft),
 //            Service("Uber", uberPrice, timeToUber),
 //            Service("Uber X", uberXPrice, timeToUberX)
-            Service("Lyft", timeToLyft, twoDecimal(lyftPrice), (lyftPrice + timeToLyft) / 2),
-            Service("Uber", timeToUber, twoDecimal(uberPrice), (uberPrice + timeToUber) / 2),
-            Service("Uber X", timeToUberX, twoDecimal(uberXPrice), (uberXPrice + timeToUberX) / 2)
+            Service("Lyft", timeToLyft, twoDecimal(lyftPrice), (lyftPrice + timeToLyft) / 2, R.drawable.lyft, "https://play.google.com/store/apps/details?id=me.lyft.android&hl=en_US&gl=US"),
+            Service("Uber", timeToUber, twoDecimal(uberPrice), (uberPrice + timeToUber) / 2, R.drawable.uber, "https://play.google.com/store/apps/details?id=com.ubercab&hl=en_US&gl=US"),
+            Service("Uber X", timeToUberX, twoDecimal(uberXPrice), (uberXPrice + timeToUberX) / 2, R.drawable.uber, "https://play.google.com/store/apps/details?id=com.ubercab&hl=en_US&gl=US")
         )
         if (distance < 5) {
-            serviceList.add(Service("Walking", timeToWalk, twoDecimal(0.00), timeToWalk / 2.00))
-            serviceList.add(Service("Bird", timeToScooter, twoDecimal(birdPrice), (birdPrice + timeToScooter) / 2))
-            serviceList.add(Service("Lime", timeToScooter, twoDecimal(limePrice), (limePrice + timeToScooter) / 2))
+            serviceList.add(Service("Walking", timeToWalk, twoDecimal(0.00), timeToWalk / 2.00, 0, ""))
+            serviceList.add(Service("Bird", timeToScooter, twoDecimal(birdPrice), (birdPrice + timeToScooter) / 2, R.drawable.bird, "https://play.google.com/store/apps/details?id=co.bird.android&hl=en_US&gl=US"))
+            serviceList.add(Service("Lime", timeToScooter, twoDecimal(limePrice), (limePrice + timeToScooter) / 2, R.drawable.lime, "https://play.google.com/store/apps/details?id=com.limebike&hl=en_US&gl=US"))
         }
 
         //hardcode

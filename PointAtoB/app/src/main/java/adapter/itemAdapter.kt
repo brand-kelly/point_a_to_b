@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pointatob.R
@@ -18,6 +19,7 @@ class ItemAdapter (
         val serviceName: TextView = view.findViewById(R.id.service_name)
         val time: TextView = view.findViewById(R.id.time)
         val price: TextView = view.findViewById(R.id.price)
+        val app: ImageButton = view.findViewById(R.id.app)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder{
@@ -32,6 +34,14 @@ class ItemAdapter (
         holder.serviceName.text = item.serviceName.toString()
         holder.time.text = item.time.toString() + "mins"
         holder.price.text = "$" + item.price.toString()
+        if (item.app == 0) {
+            holder.app.visibility = View.GONE
+        }else{
+            holder.app.setBackgroundResource(item.app)
+            holder.app.setOnClickListener {
+                //TODO: open respective google play store page using item.url
+            }
+        }
     }
 
     override fun getItemCount() = dataset.size
