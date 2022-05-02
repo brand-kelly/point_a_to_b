@@ -1,11 +1,14 @@
 package adapter
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pointatob.R
 import model.Service
@@ -39,10 +42,15 @@ class ItemAdapter (
         }else{
             holder.app.setBackgroundResource(item.app)
             holder.app.setOnClickListener {
-                //TODO: open respective google play store page using item.url
+                openApp(item.url)
             }
         }
     }
 
     override fun getItemCount() = dataset.size
+    fun openApp(url: String){
+        val openURL = Intent(Intent.ACTION_VIEW)
+        openURL.data = Uri.parse(url)
+        context.startActivity(openURL)
+    }
 }
