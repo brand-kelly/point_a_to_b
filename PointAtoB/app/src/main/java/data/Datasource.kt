@@ -1,6 +1,8 @@
 package data
 
 import model.Service
+import java.math.BigDecimal
+import java.math.RoundingMode
 import java.util.*
 import kotlin.math.roundToInt
 import kotlin.random.Random
@@ -28,9 +30,9 @@ class Datasource {
         val randomLimeVal = Random.nextDouble(0.45, 0.55)
         val randomBirdVal = Random.nextDouble(0.45, 0.55)
 
-        val uberXPrice = (2 + distance * 2.50 * surge).roundToInt()
-        val uberPrice = (2 + distance * 2.00 * randomUberVal * surge).roundToInt()
-        val lyftPrice = (2 + distance * 2.00 * randomLyftVal * surge).roundToInt()
+        val uberXPrice = (2 + distance * 2.50 * surge)//.roundToInt()
+        val uberPrice = (2 + distance * 2.00 * randomUberVal * surge)//.roundToInt()
+        val lyftPrice = (2 + distance * 2.00 * randomLyftVal * surge)//.roundToInt()
 
         var limePrice = 0.00
         var birdPrice = 0.00
@@ -41,14 +43,17 @@ class Datasource {
 
 
         val serviceList = mutableListOf(
-            Service("Lyft", lyftPrice, timeToLyft),
-            Service("Uber", uberPrice, timeToUber),
-            Service("Uber X", uberXPrice, timeToUberX)
+//            Service("Lyft", lyftPrice, timeToLyft),
+//            Service("Uber", uberPrice, timeToUber),
+//            Service("Uber X", uberXPrice, timeToUberX)
+            Service("Lyft", timeToLyft, twoDecimal(lyftPrice), (lyftPrice + timeToLyft) / 2),
+            Service("Uber", timeToUber, twoDecimal(uberPrice), (uberPrice + timeToUber) / 2),
+            Service("Uber X", timeToUberX, twoDecimal(uberXPrice), (uberXPrice + timeToUberX) / 2)
         )
         if (distance < 5) {
-            serviceList.add(Service("Walking", timeToWalk, 0))
-            serviceList.add(Service("Bird", birdPrice.roundToInt(), timeToScooter))
-            serviceList.add(Service("Lime", limePrice.roundToInt(), timeToScooter))
+            serviceList.add(Service("Walking", timeToWalk, twoDecimal(0.00), timeToWalk / 2.00))
+            serviceList.add(Service("Bird", timeToScooter, twoDecimal(birdPrice), (birdPrice + timeToScooter) / 2))
+            serviceList.add(Service("Lime", timeToScooter, twoDecimal(limePrice), (limePrice + timeToScooter) / 2))
         }
 
         //hardcode
@@ -57,8 +62,12 @@ class Datasource {
         } else if (selected == "Fastest") {
             serviceList.sortedWith(compareBy { it.time })
         } else {
-            serviceList
+            serviceList.sortedWith(compareBy {it.avg})
         }
+
+    }
+    fun twoDecimal(d: Double) : BigDecimal{
+        return BigDecimal(d).setScale(2, RoundingMode.HALF_EVEN)
     }
 
 }
